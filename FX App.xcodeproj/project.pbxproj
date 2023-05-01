@@ -27,6 +27,7 @@
 		D13D008629FD779F00560D56 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D008529FD779F00560D56 /* NetworkServiceProtocol.swift */; };
 		D13D008829FD7AA700560D56 /* GenericResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D008729FD7AA700560D56 /* GenericResource.swift */; };
 		D13D008A29FD7CF900560D56 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D008929FD7CF900560D56 /* NetworkError.swift */; };
+		D1886EF82A007BF20013D84E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1886EF72A007BF20013D84E /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		D13D008529FD779F00560D56 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		D13D008729FD7AA700560D56 /* GenericResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResource.swift; sourceTree = "<group>"; };
 		D13D008929FD7CF900560D56 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		D1886EF72A007BF20013D84E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,8 @@
 		D13D004029FD066000560D56 /* FX App */ = {
 			isa = PBXGroup;
 			children = (
+				D1886EF92A007F740013D84E /* New Group */,
+				D1886EF62A007BCB0013D84E /* Views */,
 				D13D008229FD76C500560D56 /* Network */,
 				D13D007729FD201900560D56 /* Models */,
 				D13D007429FD0BCF00560D56 /* Utils */,
@@ -182,6 +186,21 @@
 				D13D008929FD7CF900560D56 /* NetworkError.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		D1886EF62A007BCB0013D84E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D1886EF72A007BF20013D84E /* MainViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D1886EF92A007F740013D84E /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,6 +343,7 @@
 				D13D007929FD202C00560D56 /* CurrenciesResponse.swift in Sources */,
 				D13D007D29FD2A1600560D56 /* ExchangeRate.swift in Sources */,
 				D13D007F29FD2C8200560D56 /* TimeSeriesResponse.swift in Sources */,
+				D1886EF82A007BF20013D84E /* MainViewController.swift in Sources */,
 				D13D008829FD7AA700560D56 /* GenericResource.swift in Sources */,
 				D13D008629FD779F00560D56 /* NetworkServiceProtocol.swift in Sources */,
 				D13D004229FD066000560D56 /* AppDelegate.swift in Sources */,
