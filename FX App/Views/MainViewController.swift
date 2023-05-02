@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Combine
+import DropDown
 
 class MainViewController: UIViewController {
     
@@ -21,10 +23,24 @@ class MainViewController: UIViewController {
     let getExchangeRateButton = UIButton()
     let exchangeRateView = UIView()
     let exchangeRateLabel = UILabel()
+    let activityIndicator = UIActivityIndicatorView()
+    
+    let fromCurrenciesDropDown = DropDown()
+    let toCurrenciesDropDown = DropDown()
+    
+    private let mainViewModel = MainViewModel()
+    private var cancellables = Set<AnyCancellable>()
+    
+    var selectedFromCurrency: Currency?
+    var selectedTpCurrency: Currency?
+    
+    var randomString = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        bindViewModel()
+        mainViewModel.getCurrencies()
     }
     
     
@@ -43,6 +59,7 @@ class MainViewController: UIViewController {
         toView.addSubview(toDownArrowImageView)
         toView.addSubview(toCurrencyLabel)
         exchangeRateView.addSubview(exchangeRateLabel)
+        view.addSubview(activityIndicator)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         fromLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -56,6 +73,7 @@ class MainViewController: UIViewController {
         getExchangeRateButton.translatesAutoresizingMaskIntoConstraints = false
         exchangeRateView.translatesAutoresizingMaskIntoConstraints = false
         exchangeRateLabel.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
@@ -93,7 +111,9 @@ class MainViewController: UIViewController {
             exchangeRateView.topAnchor.constraint(equalTo: getExchangeRateButton.bottomAnchor, constant: 30),
             exchangeRateView.heightAnchor.constraint(equalToConstant: 80),
             exchangeRateLabel.centerYAnchor.constraint(equalTo: exchangeRateView.centerYAnchor),
-            exchangeRateLabel.centerXAnchor.constraint(equalTo: exchangeRateView.centerXAnchor)
+            exchangeRateLabel.centerXAnchor.constraint(equalTo: exchangeRateView.centerXAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
             
         ])
         
@@ -118,11 +138,17 @@ class MainViewController: UIViewController {
         fromView.layer.borderColor = UIColor.systemPink.cgColor
         fromView.layer.borderWidth = 0.1
         fromView.layer.cornerRadius = 5
+        fromView.isUserInteractionEnabled = true
+        let fromViewTappedGesture = UITapGestureRecognizer(target: self, action:  #selector (self.fromViewTapped(_:)))
+        fromView.addGestureRecognizer(fromViewTappedGesture)
         
         toView.backgroundColor = .systemPink.withAlphaComponent(0.05)
         toView.layer.borderColor = UIColor.systemPink.cgColor
         toView.layer.borderWidth = 0.1
         toView.layer.cornerRadius = 5
+        toView.isUserInteractionEnabled = true
+        let toViewTappedGesture = UITapGestureRecognizer(target: self, action:  #selector (self.toViewTapped(_:)))
+        toView.addGestureRecognizer(toViewTappedGesture)
         
         toDownArrowImageView.image = UIImage(systemName: "arrowtriangle.down.fill")
         toDownArrowImageView.tintColor = .darkGray
@@ -144,7 +170,65 @@ class MainViewController: UIViewController {
         exchangeRateView.backgroundColor = .systemPink.withAlphaComponent(0.05)
         exchangeRateView.layer.borderColor = UIColor.systemPink.cgColor
         exchangeRateView.layer.borderWidth = 0.1
+        exchangeRateView.isHidden = true
+        
+        activityIndicator.style = .large
+        activityIndicator.color = .systemPink
 
+    }
+    
+    
+    private func bindViewModel() {
+        
+        mainViewModel.networkError.sink { [weak self] errorMessage in
+            print(errorMessage)
+            print(self!.randomString)
+        }.store(in: &cancellables)
+        
+        mainViewModel.showActivityIndicator.sink { [weak self] showIndicator in
+            if showIndicator {
+                self?.activityIndicator.startAnimating()
+            }
+            else {
+                self?.activityIndicator.stopAnimating()
+            }
+        }.store(in: &cancellables)
+        
+        mainViewModel.currencies.sink { [weak self] _ in
+            if let self = self {
+                self.setupDropDowns(currencies: self.mainViewModel.currencyNamesArray)
+            }
+        }.store(in: &cancellables)
+        
+    }
+    
+    private func setupDropDowns(currencies: [String]) {
+        
+        fromCurrenciesDropDown.anchorView = fromView
+        toCurrenciesDropDown.anchorView = toView
+        
+        fromCurrenciesDropDown.dataSource = currencies
+        toCurrenciesDropDown.dataSource = currencies
+        
+        fromCurrenciesDropDown.selectionAction  = { [unowned self] (index: Int, item: String) in
+            fromCurrencyLabel.text = mainViewModel.currencyCodesArray[index]
+            
+        }
+        
+        toCurrenciesDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            toCurrencyLabel.text = mainViewModel.currencyCodesArray[index]
+        }
+        
+        fromCurrencyLabel.text = mainViewModel.currencyCodesArray[0]
+        toCurrencyLabel.text = mainViewModel.currencyCodesArray[1]
+    }
+    
+    @objc func fromViewTapped(_ sender:UITapGestureRecognizer) {
+        fromCurrenciesDropDown.show()
+    }
+    
+    @objc func toViewTapped(_ sender:UITapGestureRecognizer) {
+        toCurrenciesDropDown.show()
     }
 
 }

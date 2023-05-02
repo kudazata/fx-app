@@ -1,0 +1,6 @@
+framework module Pods_FX_App {
+  umbrella header "Pods-FX App-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -42,7 +42,7 @@ struct NetworkService: NetworkServiceProtocol {
             DispatchQueue.main.async {
                 completion(.success(resource.parse(data)))
             }
-        }
+        }.resume()
         
     }
     
