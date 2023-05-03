@@ -77,7 +77,7 @@ struct NetworkService: NetworkServiceProtocol {
     ///    - from: The base currency
     ///    - to: the currency being converted to
     ///    - completion: Code to be executed by the caller. Will contain type Result
-    func getExchangeRate(from: Currency, to: Currency, completion: @escaping (Result<ExchangeRate?, NetworkError>) -> Void) {
+    func getExchangeRate(from: String, to: String, completion: @escaping (Result<ExchangeRate?, NetworkError>) -> Void) {
         
         let urlString = URLs.getExchangeRateUrl(from: from, to: to)
         let resource = GenericResource<ExchangeRate>(urlString: urlString) { data in

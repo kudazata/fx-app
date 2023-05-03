@@ -18,6 +18,7 @@ class MainViewModel {
     let networkError = PassthroughSubject<String, Never>()
     let showActivityIndicator = PassthroughSubject<Bool, Never>()
     let currencies = PassthroughSubject<[Currency], Never>()
+    let exchangeRate = PassthroughSubject<ExchangeRate, Never>()
     
     init(networkService: NetworkServiceProtocol = NetworkService()) {
         self.networkService = networkService
@@ -50,5 +51,20 @@ class MainViewModel {
         currencyNamesArray = availableCurrencies.map { $0.currencyName }
         currencyCodesArray = availableCurrencies.map { $0.currencyCode }
         currencies.send(availableCurrencies)
+    }
+    
+    func getExchangeRate(from: String, to: String) {
+        showActivityIndicator.send(true)
+        networkService.getExchangeRate(from: from, to: to) { result in
+            self.showActivityIndicator.send(false)
+            switch result {
+            case let .success(exchangeRate):
+                if let exchangeRate = exchangeRate {
+                    self.exchangeRate.send(exchangeRate)
+                }
+            case let .failure(error):
+                self.networkError.send(error.message)
+            }
+        }
     }
 }

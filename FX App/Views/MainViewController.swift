@@ -161,6 +161,7 @@ class MainViewController: UIViewController {
         getExchangeRateButton.setTitleColor(.white, for: .normal)
         getExchangeRateButton.titleLabel?.font = UIFont(name: "Avenir-black", size: 14)
         getExchangeRateButton.layer.cornerRadius = 5
+        getExchangeRateButton.addTarget(self, action: #selector(getExchangeRateTapped), for: .touchUpInside)
         
         exchangeRateLabel.text = "1 USD = 18.99 ZAR"
         exchangeRateLabel.font = UIFont(name: "Avenir-black", size: 20)
@@ -200,6 +201,11 @@ class MainViewController: UIViewController {
             }
         }.store(in: &cancellables)
         
+        mainViewModel.exchangeRate.sink { [weak self] exchangeRate in
+            self?.exchangeRateView.isHidden = false
+            self?.exchangeRateLabel.text = "1 \(exchangeRate.from) = \(exchangeRate.total) \(exchangeRate.to)"
+        }.store(in: &cancellables)
+        
     }
     
     private func setupDropDowns(currencies: [String]) {
@@ -229,6 +235,11 @@ class MainViewController: UIViewController {
     
     @objc func toViewTapped(_ sender:UITapGestureRecognizer) {
         toCurrenciesDropDown.show()
+    }
+    
+    @objc func getExchangeRateTapped(_ sender: UIButton) {
+        exchangeRateView.isHidden = true
+        mainViewModel.getExchangeRate(from: fromCurrencyLabel.text!, to: toCurrencyLabel.text!)
     }
 
 }

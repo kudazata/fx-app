@@ -14,6 +14,7 @@ class MainViewModelTests: XCTestCase {
     var mainViewModel: MainViewModel!
     var networkServiceMock = NetworkServiceMock()
     var errorMessage = ""
+    var exchangeRate: ExchangeRate!
     private var cancellables = Set<AnyCancellable>()
 
     override func setUpWithError() throws {
@@ -25,6 +26,8 @@ class MainViewModelTests: XCTestCase {
 
     override func tearDownWithError() throws {
         mainViewModel = nil
+        errorMessage = ""
+        exchangeRate = nil
     }
     
     func testCurrencyArraysCount_ShouldInitiallyBeZero() {
@@ -49,6 +52,23 @@ class MainViewModelTests: XCTestCase {
         networkServiceMock.shouldFail = true
         mainViewModel.networkService = networkServiceMock
         mainViewModel.getCurrencies()
+        XCTAssertEqual(self.errorMessage, "There was no data returned from the server")
+    }
+    
+    func testGetExchangeRate_ShouldReturnExchangeRateObject() {
+        mainViewModel.exchangeRate.sink { [weak self] exchangeRate in
+            self?.exchangeRate = exchangeRate
+        }.store(in: &cancellables)
+        mainViewModel.getExchangeRate(from: "USD", to: "ZAR")
+        XCTAssertEqual(self.exchangeRate.to, "ZAR")
+        XCTAssertEqual(self.exchangeRate.from, "USD")
+        XCTAssertEqual(self.exchangeRate.total, 18.55)
+    }
+    
+    func testGetExchangeRateError_ShouldPopulateCorrectErrorMessage() {
+        networkServiceMock.shouldFail = true
+        mainViewModel.networkService = networkServiceMock
+        mainViewModel.getExchangeRate(from: "USD", to: "ZAR")
         XCTAssertEqual(self.errorMessage, "There was no data returned from the server")
     }
 

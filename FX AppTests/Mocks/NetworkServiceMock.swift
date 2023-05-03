@@ -70,7 +70,15 @@ struct NetworkServiceMock: NetworkServiceProtocol {
         
     }
     
-    func getExchangeRate(from: Currency, to: Currency, completion: @escaping (Result<ExchangeRate?, NetworkError>) -> Void) {
+    func getExchangeRate(from: String, to: String, completion: @escaping (Result<ExchangeRate?, NetworkError>) -> Void) {
+        
+        if shouldFail {
+            completion(.failure(.noData))
+        }
+        else {
+            let exchangeRate = ExchangeRate(from: "USD", price: 18.55, timestamp: 1683100645, to: "ZAR", total: 18.55)
+            completion(.success(exchangeRate))
+        }
     }
     
     func getTimeSeries(from: Currency, to: Currency, completion: @escaping (Result<TimeSeriesResponse?, NetworkError>) -> Void) {

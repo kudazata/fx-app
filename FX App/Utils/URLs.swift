@@ -14,8 +14,8 @@ struct URLs {
     
     static let getCurrenciesUrl = baseUrl + "apicurrencies?api_key=" + apiKey
     
-    static func getExchangeRateUrl(from: Currency, to: Currency) -> String {
-        return baseUrl + "apiconvert?api_key=" + apiKey + "&from=\(from.currencyCode)&to=" + to.currencyCode + "&amount=1"
+    static func getExchangeRateUrl(from: String, to: String) -> String {
+        return baseUrl + "apiconvert?api_key=" + apiKey + "&from=\(from)&to=" + to + "&amount=1"
     }
     
     static func getTimeSeriesUrl(from: Currency, to: Currency, dates: [String]) -> String {
