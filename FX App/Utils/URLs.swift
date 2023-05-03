@@ -18,12 +18,14 @@ struct URLs {
         return baseUrl + "apiconvert?api_key=" + apiKey + "&from=\(from)&to=" + to + "&amount=1"
     }
     
-    static func getTimeSeriesUrl(from: Currency, to: Currency, dates: [String]) -> String {
+    static func getTimeSeriesUrl(from: String, to: String, dates: [String]) -> String {
         
-        return baseUrl + "apitimeseries?api_key=" + apiKey + "&currency=" + from.currencyCode + to.currencyCode + "&start_date=" + dates[0] + "&end_date=" + dates[1] + "&format=close"
+        let url = baseUrl + "apitimeseries?api_key=" + apiKey + "&currency=" + from + to + "&start_date=" + dates[0] + "&end_date=" + dates[1] + "&format=close"
+        print(url)
+        return url
     }
     
-    static func getDates() -> [String] {
+    static func getDatesForTimeSeries() -> [String] {
         
         var currentDate = Date()
         let calendar = Calendar.current

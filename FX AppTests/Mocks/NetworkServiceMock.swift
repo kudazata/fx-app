@@ -81,7 +81,91 @@ struct NetworkServiceMock: NetworkServiceProtocol {
         }
     }
     
-    func getTimeSeries(from: Currency, to: Currency, completion: @escaping (Result<TimeSeriesResponse?, NetworkError>) -> Void) {
+    func getTimeSeries(from: String, to: String, completion: @escaping (Result<TimeSeriesResponse?, NetworkError>) -> Void) {
+        
+        if shouldFail {
+            completion(.failure(.badRequest))
+        }
+        else {
+            
+            let prices: [String: [String: Float]] = [
+                "2023-04-03": [
+                    "USDZAR": 17.8495
+                ],
+                "2023-04-04": [
+                    "USDZAR": 17.91779
+                ],
+                "2023-04-05": [
+                    "USDZAR": 18.0545
+                ],
+                "2023-04-06": [
+                    "USDZAR": 18.23125
+                ],
+                "2023-04-07": [
+                    "USDZAR": 18.1948
+                ],
+                "2023-04-10": [
+                    "USDZAR": 18.49018
+                ],
+                "2023-04-11": [
+                    "USDZAR": 18.37177
+                ],
+                "2023-04-12": [
+                    "USDZAR": 18.43491
+                ],
+                "2023-04-13": [
+                    "USDZAR": 18.05616
+                ],
+                "2023-04-14": [
+                    "USDZAR": 18.07762
+                ],
+                "2023-04-17": [
+                    "USDZAR": 18.31941
+                ],
+                "2023-04-18": [
+                    "USDZAR": 18.16352
+                ],
+                "2023-04-19": [
+                    "USDZAR": 18.168
+                ],
+                "2023-04-20": [
+                    "USDZAR": 18.03875
+                ],
+                "2023-04-21": [
+                    "USDZAR": 18.08279
+                ],
+                "2023-04-24": [
+                    "USDZAR": 18.13599
+                ],
+                "2023-04-25": [
+                    "USDZAR": 18.34103
+                ],
+                "2023-04-26": [
+                    "USDZAR": 18.4122
+                ],
+                "2023-04-27": [
+                    "USDZAR": 18.3048
+                ],
+                "2023-04-28": [
+                    "USDZAR": 18.2888
+                ],
+                "2023-05-01": [
+                    "USDZAR": 18.40175
+                ],
+                "2023-05-02": [
+                    "USDZAR": 18.475
+                ],
+                "2023-05-03": [
+                    "USDZAR": 18.29788
+                ]
+                
+            ]
+            
+            let timeSeriesResponse = TimeSeriesResponse(endDate: "2023-05-03", startDate: "2023-04-03", price: prices, error: nil)
+            
+            completion(.success(timeSeriesResponse))
+            
+        }
     }
     
     

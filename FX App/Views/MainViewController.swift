@@ -24,6 +24,7 @@ class MainViewController: UIViewController {
     let exchangeRateView = UIView()
     let exchangeRateLabel = UILabel()
     let activityIndicator = UIActivityIndicatorView()
+    let timeSeriesErrorLabel = UILabel()
     
     let fromCurrenciesDropDown = DropDown()
     let toCurrenciesDropDown = DropDown()
@@ -60,6 +61,7 @@ class MainViewController: UIViewController {
         toView.addSubview(toCurrencyLabel)
         exchangeRateView.addSubview(exchangeRateLabel)
         view.addSubview(activityIndicator)
+        view.addSubview(timeSeriesErrorLabel)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         fromLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +76,7 @@ class MainViewController: UIViewController {
         exchangeRateView.translatesAutoresizingMaskIntoConstraints = false
         exchangeRateLabel.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        timeSeriesErrorLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
@@ -113,7 +116,11 @@ class MainViewController: UIViewController {
             exchangeRateLabel.centerYAnchor.constraint(equalTo: exchangeRateView.centerYAnchor),
             exchangeRateLabel.centerXAnchor.constraint(equalTo: exchangeRateView.centerXAnchor),
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            timeSeriesErrorLabel.topAnchor.constraint(equalTo: exchangeRateView.bottomAnchor, constant: 10),
+            timeSeriesErrorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            timeSeriesErrorLabel.leadingAnchor.constraint(equalTo: exchangeRateView.leadingAnchor),
+            timeSeriesErrorLabel.trailingAnchor.constraint(equalTo: exchangeRateView.trailingAnchor)
             
         ])
         
@@ -163,9 +170,13 @@ class MainViewController: UIViewController {
         getExchangeRateButton.layer.cornerRadius = 5
         getExchangeRateButton.addTarget(self, action: #selector(getExchangeRateTapped), for: .touchUpInside)
         
-        exchangeRateLabel.text = "1 USD = 18.99 ZAR"
         exchangeRateLabel.font = UIFont(name: "Avenir-black", size: 20)
         exchangeRateLabel.textColor = .darkGray
+        
+        timeSeriesErrorLabel.font = UIFont(name: "Avenir-medium", size: 12)
+        timeSeriesErrorLabel.textColor = .lightGray
+        timeSeriesErrorLabel.numberOfLines = 0
+        timeSeriesErrorLabel.isHidden = true
         
         exchangeRateView.layer.cornerRadius = 5
         exchangeRateView.backgroundColor = .systemPink.withAlphaComponent(0.05)
@@ -181,9 +192,10 @@ class MainViewController: UIViewController {
     
     private func bindViewModel() {
         
-        mainViewModel.networkError.sink { [weak self] errorMessage in
-            print(errorMessage)
-            print(self!.randomString)
+        mainViewModel.networkErrorPublisher.sink { [weak self] errorMessage in
+            if let self = self {
+                showGeneralAlert(title: "Error", message: errorMessage, vc: self)
+            }
         }.store(in: &cancellables)
         
         mainViewModel.showActivityIndicator.sink { [weak self] showIndicator in
@@ -195,15 +207,20 @@ class MainViewController: UIViewController {
             }
         }.store(in: &cancellables)
         
-        mainViewModel.currencies.sink { [weak self] _ in
+        mainViewModel.currenciesPublisher.sink { [weak self] _ in
             if let self = self {
                 self.setupDropDowns(currencies: self.mainViewModel.currencyNamesArray)
             }
         }.store(in: &cancellables)
         
-        mainViewModel.exchangeRate.sink { [weak self] exchangeRate in
+        mainViewModel.exchangeRatePublisher.sink { [weak self] exchangeRate in
             self?.exchangeRateView.isHidden = false
-            self?.exchangeRateLabel.text = "1 \(exchangeRate.from) = \(exchangeRate.total) \(exchangeRate.to)"
+            self?.exchangeRateLabel.text = "1 \(exchangeRate.from) = \(exchangeRate.total.toStringWithTwoDecimalPlaces()) \(exchangeRate.to)"
+        }.store(in: &cancellables)
+        
+        mainViewModel.timeSeriesErrorPublisher.sink { [weak self] errorMessage in
+            self?.timeSeriesErrorLabel.isHidden = false
+            self?.timeSeriesErrorLabel.text = errorMessage
         }.store(in: &cancellables)
         
     }
@@ -239,7 +256,8 @@ class MainViewController: UIViewController {
     
     @objc func getExchangeRateTapped(_ sender: UIButton) {
         exchangeRateView.isHidden = true
-        mainViewModel.getExchangeRate(from: fromCurrencyLabel.text!, to: toCurrencyLabel.text!)
+        timeSeriesErrorLabel.isHidden = true
+        mainViewModel.getExchangeRateAndTimeSeries(from: fromCurrencyLabel.text!, to: toCurrencyLabel.text!)
     }
 
 }

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		257AB3B47352FBF32CD2EC75 /* Pods_FX_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBEF6D71CFCA3DE467A02A06 /* Pods_FX_AppTests.framework */; };
 		80C09BA3C8D4EED3AB5B8042 /* Pods_FX_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A4B3DAC2F437E314C307F4 /* Pods_FX_App.framework */; };
+		D11096482A024F1100FBC54B /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11096472A024F1100FBC54B /* GraphView.swift */; };
+		D110964A2A02553A00FBC54B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11096492A02553A00FBC54B /* Extensions.swift */; };
+		D110964C2A025B0000FBC54B /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D110964B2A025B0000FBC54B /* CommonFunctions.swift */; };
 		D13D004229FD066000560D56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D004129FD066000560D56 /* AppDelegate.swift */; };
 		D13D004429FD066000560D56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D004329FD066000560D56 /* SceneDelegate.swift */; };
 		D13D004629FD066000560D56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D004529FD066000560D56 /* ViewController.swift */; };
@@ -60,6 +63,9 @@
 		9D2AFFAF0A7D8AEA47A65B6A /* Pods-FX App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FX App.release.xcconfig"; path = "Target Support Files/Pods-FX App/Pods-FX App.release.xcconfig"; sourceTree = "<group>"; };
 		B2A4B3DAC2F437E314C307F4 /* Pods_FX_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FX_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBEF6D71CFCA3DE467A02A06 /* Pods_FX_AppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FX_AppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D11096472A024F1100FBC54B /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		D11096492A02553A00FBC54B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D110964B2A025B0000FBC54B /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 		D13D003E29FD066000560D56 /* FX App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FX App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13D004129FD066000560D56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D13D004329FD066000560D56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +138,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D110964D2A0296F200FBC54B /* ViewModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				D1A5D2CA2A0155F200241388 /* MainViewModelTests.swift */,
+			);
+			path = ViewModelTests;
+			sourceTree = "<group>";
+		};
 		D13D003529FD066000560D56 = {
 			isa = PBXGroup;
 			children = (
@@ -177,8 +191,8 @@
 		D13D005A29FD066200560D56 /* FX AppTests */ = {
 			isa = PBXGroup;
 			children = (
+				D110964D2A0296F200FBC54B /* ViewModelTests */,
 				D1A5D2CC2A01561C00241388 /* Mocks */,
-				D1A5D2CA2A0155F200241388 /* MainViewModelTests.swift */,
 			);
 			path = "FX AppTests";
 			sourceTree = "<group>";
@@ -196,6 +210,8 @@
 			isa = PBXGroup;
 			children = (
 				D13D007529FD0BDF00560D56 /* URLs.swift */,
+				D11096492A02553A00FBC54B /* Extensions.swift */,
+				D110964B2A025B0000FBC54B /* CommonFunctions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -227,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				D1886EF72A007BF20013D84E /* MainViewController.swift */,
+				D11096472A024F1100FBC54B /* GraphView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -497,6 +514,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D13D008429FD777F00560D56 /* NetworkService.swift in Sources */,
+				D110964A2A02553A00FBC54B /* Extensions.swift in Sources */,
 				D13D008A29FD7CF900560D56 /* NetworkError.swift in Sources */,
 				D13D007629FD0BDF00560D56 /* URLs.swift in Sources */,
 				D13D004629FD066000560D56 /* ViewController.swift in Sources */,
@@ -508,7 +526,9 @@
 				D1886EF82A007BF20013D84E /* MainViewController.swift in Sources */,
 				D13D008829FD7AA700560D56 /* GenericResource.swift in Sources */,
 				D13D008629FD779F00560D56 /* NetworkServiceProtocol.swift in Sources */,
+				D110964C2A025B0000FBC54B /* CommonFunctions.swift in Sources */,
 				D13D004229FD066000560D56 /* AppDelegate.swift in Sources */,
+				D11096482A024F1100FBC54B /* GraphView.swift in Sources */,
 				D13D007B29FD206800560D56 /* Currency.swift in Sources */,
 				D13D004429FD066000560D56 /* SceneDelegate.swift in Sources */,
 				D1886EFB2A0082690013D84E /* MainViewModel.swift in Sources */,

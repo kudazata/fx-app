@@ -22,26 +22,27 @@ struct NetworkService: NetworkServiceProtocol {
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             
-            if let error = error {
-                completion(.failure(.customError(error)))
-                return
-            }
-            
-            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-            
-            guard (200..<300).contains(statusCode) else {
-                completion(.failure(.badRequest))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(.noData))
-                return
-            }
-            
             DispatchQueue.main.async {
+                if let error = error {
+                    completion(.failure(.customError(error)))
+                    return
+                }
+                
+                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+                
+                guard (200..<300).contains(statusCode) else {
+                    completion(.failure(.badRequest))
+                    return
+                }
+                
+                guard let data = data else {
+                    completion(.failure(.noData))
+                    return
+                }
+                
                 completion(.success(resource.parse(data)))
             }
+            
         }.resume()
         
     }
@@ -108,9 +109,9 @@ struct NetworkService: NetworkServiceProtocol {
     ///    - from: The base currency
     ///    - to: the currency being converted to
     ///    - completion: Code to be executed by the caller. Will contain type Result
-    func getTimeSeries(from: Currency, to: Currency, completion: @escaping (Result<TimeSeriesResponse?, NetworkError>) -> Void) {
+    func getTimeSeries(from: String, to: String, completion: @escaping (Result<TimeSeriesResponse?, NetworkError>) -> Void) {
         
-        let dates = URLs.getDates()
+        let dates = URLs.getDatesForTimeSeries()
         let urlString = URLs.getTimeSeriesUrl(from: from, to: to, dates: dates)
         let resource = GenericResource<TimeSeriesResponse>(urlString: urlString) { data in
             
@@ -122,6 +123,7 @@ struct NetworkService: NetworkServiceProtocol {
             }
             catch {
                 completion(.failure(.decodingError))
+                print(error)
                 return nil
             }
         }
