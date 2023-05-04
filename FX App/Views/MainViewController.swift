@@ -76,6 +76,7 @@ class MainViewController: UIViewController {
         toView.addGestureRecognizer(toViewTappedGesture)
         
         fromDownArrowImageView.image = UIImage(systemName: "arrowtriangle.down.fill")
+        toDownArrowImageView.image = UIImage(systemName: "arrowtriangle.down.fill")
         
         getExchangeRateButton.setTitle("Get Exchange rate", for: .normal)
         getExchangeRateButton.addTarget(self, action: #selector(getExchangeRateTapped), for: .touchUpInside)
