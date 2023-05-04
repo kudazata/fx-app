@@ -56,7 +56,7 @@
 		057C42A57114F740287C7B22CA9A75C8 /* Pods-FX App-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FX App-umbrella.h"; sourceTree = "<group>"; };
 		190E70FE8F693084191201BA9195913B /* Pods-FX App-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FX App-Info.plist"; sourceTree = "<group>"; };
 		2B79E9F2CB9CA28A7B9C5A36540BEE6A /* Pods-FX AppTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FX AppTests-umbrella.h"; sourceTree = "<group>"; };
-		2EFE91875F1E81134988161D16080D84 /* Pods_FX_AppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FX_AppTests.framework; path = "Pods-FX AppTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EFE91875F1E81134988161D16080D84 /* Pods_FX_AppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FX_AppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F8A529C653A26F8D0B57E1CD7B2B5E6 /* DropDown-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "DropDown-Info.plist"; sourceTree = "<group>"; };
 		2FCC1AD54C344AFD4E184B9586BFE267 /* DropDown.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DropDown.swift; path = DropDown/src/DropDown.swift; sourceTree = "<group>"; };
 		317AA2D1B15BD0209CF9ECCE053D2B8E /* Pods-FX App-FX AppUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FX App-FX AppUITests-umbrella.h"; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		488B3D596F73DAA0C6FF2FBEF16665A0 /* Pods-FX AppTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FX AppTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		5EB47DCC379F7D1DC24BD19C719FD5C4 /* Pods-FX AppTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FX AppTests.modulemap"; sourceTree = "<group>"; };
 		6634715275A66AA91174C1215D7657F3 /* Pods-FX AppTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FX AppTests-dummy.m"; sourceTree = "<group>"; };
-		670DF605AFBF5365645011E2D7D06D56 /* Pods_FX_App_FX_AppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FX_App_FX_AppUITests.framework; path = "Pods-FX App-FX AppUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		670DF605AFBF5365645011E2D7D06D56 /* Pods_FX_App_FX_AppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FX_App_FX_AppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6987B334859ED2081AD7FFDBFC3F4D54 /* Pods-FX AppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FX AppTests.release.xcconfig"; sourceTree = "<group>"; };
 		6C323725F51759EB71768512F06D8C94 /* Pods-FX App-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FX App-dummy.m"; sourceTree = "<group>"; };
 		6F7A701D626BD593A83783939FDEB4E3 /* Pods-FX App-FX AppUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FX App-FX AppUITests-frameworks.sh"; sourceTree = "<group>"; };
@@ -78,9 +78,9 @@
 		93EA092CDFBD4C66A29A9CDEA1DE78E1 /* DropDownCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DropDownCell.swift; path = DropDown/src/DropDownCell.swift; sourceTree = "<group>"; };
 		9417A2E488E89653AD8AFF581B28E5C7 /* Pods-FX App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FX App.debug.xcconfig"; sourceTree = "<group>"; };
 		964D151F746BA7EB3D21012E4CEC01BF /* Pods-FX App-FX AppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FX App-FX AppUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		9B6725B782188F18CB76A740433F14E4 /* DropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DropDown.framework; path = DropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B6725B782188F18CB76A740433F14E4 /* DropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C15EB8657063755722D9C7DC8D72885 /* DropDown.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DropDown.release.xcconfig; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9EB67F1D6AA2E07F78C23600D2DE4DB3 /* Pods-FX App-FX AppUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FX App-FX AppUITests-Info.plist"; sourceTree = "<group>"; };
 		A2D318F8A6AA92B96FC0EF01FD578FED /* Pods-FX App-FX AppUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FX App-FX AppUITests-acknowledgements.plist"; sourceTree = "<group>"; };
 		A87586FE2C9DECB6AE7FCA3238E4A1B8 /* DropDown+Appearance.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DropDown+Appearance.swift"; path = "DropDown/src/DropDown+Appearance.swift"; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 		E5CB9923CEED438D73F86E9BFBE95EC4 /* Pods-FX AppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FX AppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EE5458FBB87489D79A886B8213555C7D /* Pods-FX App-FX AppUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FX App-FX AppUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		EEBC6D732E1B0C41C6A8D03A8C81CF47 /* DropDownCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = DropDownCell.xib; path = DropDown/resources/DropDownCell.xib; sourceTree = "<group>"; };
-		EED624006838F578D45F46FBF26E0E3C /* Pods_FX_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FX_App.framework; path = "Pods-FX App.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EED624006838F578D45F46FBF26E0E3C /* Pods_FX_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FX_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F051AAAFB26FC1C7EA7AE213FCD62CDF /* Pods-FX App-FX AppUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FX App-FX AppUITests-dummy.m"; sourceTree = "<group>"; };
 		F8F61850F82D6CC477FAF8326336FD5A /* DropDown-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DropDown-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,7 +183,6 @@
 				C59647B6F3C67ED72D999C113D892AF0 /* Resources */,
 				03D114B328A63C934E528549C2DCFE8D /* Support Files */,
 			);
-			name = DropDown;
 			path = DropDown;
 			sourceTree = "<group>";
 		};
@@ -572,7 +571,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/DropDown/DropDown-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/DropDown/DropDown-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -606,7 +605,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/DropDown/DropDown-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/DropDown/DropDown-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

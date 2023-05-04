@@ -6,29 +6,31 @@
 //
 
 import SwiftUI
+import Charts
 
+
+@available(iOS 16.0, *)
 struct GraphView: View {
     
-    let dataPoints = [10, 20, 15, 30, 25, 50]
+    let timeSeriesArray: [TimeSeriesPoint]
     
     var body: some View {
-        GeometryReader { geometry in
-            Path { path in
-                
-                path.move(to: CGPoint(x: 0, y: geometry.size.height - CGFloat(dataPoints[0])))
-                
-                for i in 1..<dataPoints.count {
-                    let x = geometry.size.width / CGFloat(dataPoints.count - 1) * CGFloat(i)
-                    let y = geometry.size.height - CGFloat(dataPoints[i])
-                    path.addLine(to: CGPoint(x: x, y: y))
+        
+        VStack {
+            Chart {
+                ForEach(timeSeriesArray) { point in
+                    LineMark(x: .value("Date", point.date), y: .value("Rate", point.exchangeRate))
                 }
-            }.stroke(Color.pink, lineWidth: 2)
+            }.chartYAxis {
+                AxisMarks(position: .leading)
+            }.foregroundColor(.pink)
         }.padding()
     }
 }
 
+@available(iOS 16.0, *)
 struct GraphView_Previews: PreviewProvider {
     static var previews: some View {
-        GraphView()
+        GraphView(timeSeriesArray: [TimeSeriesPoint]())
     }
 }

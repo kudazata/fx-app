@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct TimeSeriesPoint {
+struct TimeSeriesPoint: Identifiable {
+    
+    var id: Date {
+        return self.date
+    }
+    
     var date: Date
     var exchangeRate: Float
 }

@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import SwiftUI
 import Combine
 import DropDown
 
+@available(iOS 16.0, *)
 class MainViewController: UIViewController {
     
     let titleLabel = UILabel()
@@ -25,17 +27,13 @@ class MainViewController: UIViewController {
     let exchangeRateLabel = UILabel()
     let activityIndicator = UIActivityIndicatorView()
     let timeSeriesErrorLabel = UILabel()
+    var graphView = UIView()
     
     let fromCurrenciesDropDown = DropDown()
     let toCurrenciesDropDown = DropDown()
     
     private let mainViewModel = MainViewModel()
     private var cancellables = Set<AnyCancellable>()
-    
-    var selectedFromCurrency: Currency?
-    var selectedTpCurrency: Currency?
-    
-    var randomString = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +43,7 @@ class MainViewController: UIViewController {
     }
     
     
+    //MARK: - Setting up views
     /// This function is responsible for rendering the UI elements in this view controller. All elements are intialized programmatically
     private func setupViews() {
         
@@ -79,7 +78,7 @@ class MainViewController: UIViewController {
         timeSeriesErrorLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            titleLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 40),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             fromLabel.leadingAnchor.constraint(equalTo: fromView.leadingAnchor, constant: 0),
             fromLabel.bottomAnchor.constraint(equalTo: fromView.topAnchor, constant: 0),
@@ -121,7 +120,6 @@ class MainViewController: UIViewController {
             timeSeriesErrorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             timeSeriesErrorLabel.leadingAnchor.constraint(equalTo: exchangeRateView.leadingAnchor),
             timeSeriesErrorLabel.trailingAnchor.constraint(equalTo: exchangeRateView.trailingAnchor)
-            
         ])
         
         view.backgroundColor = .white
@@ -189,7 +187,50 @@ class MainViewController: UIViewController {
 
     }
     
+    ///This function is responsible for setting up the graph. It will only be called if the backend returns time series information for a particular exchange rate
+    private func setupGraphView(timeSeriesArray: [TimeSeriesPoint]) {
+        
+        let controller = UIHostingController(rootView: GraphView(timeSeriesArray: timeSeriesArray))
     
+        if let graph = controller.view {
+            self.graphView = graph
+            view.addSubview(graphView)
+            graphView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                graphView.topAnchor.constraint(equalTo: exchangeRateView.bottomAnchor, constant: 30),
+                graphView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -30),
+                graphView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+                graphView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+
+            ])
+        }
+
+    }
+    
+    ///This function is responsible for setting up the currency picker dropdowns using DropDown library
+    private func setupDropDowns(currencies: [String]) {
+        
+        fromCurrenciesDropDown.anchorView = fromView
+        toCurrenciesDropDown.anchorView = toView
+        
+        fromCurrenciesDropDown.dataSource = currencies
+        toCurrenciesDropDown.dataSource = currencies
+        
+        fromCurrenciesDropDown.selectionAction  = { [unowned self] (index: Int, item: String) in
+            fromCurrencyLabel.text = mainViewModel.currencyCodesArray[index]
+            
+        }
+        
+        toCurrenciesDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            toCurrencyLabel.text = mainViewModel.currencyCodesArray[index]
+        }
+        
+        fromCurrencyLabel.text = mainViewModel.currencyCodesArray[0]
+        toCurrencyLabel.text = mainViewModel.currencyCodesArray[1]
+    }
+    
+    
+    //MARK: - View model bindings
     private func bindViewModel() {
         
         mainViewModel.networkErrorPublisher.sink { [weak self] errorMessage in
@@ -218,33 +259,20 @@ class MainViewController: UIViewController {
             self?.exchangeRateLabel.text = "1 \(exchangeRate.from) = \(exchangeRate.total.toStringWithTwoDecimalPlaces()) \(exchangeRate.to)"
         }.store(in: &cancellables)
         
+        mainViewModel.timeSeriesPublisher.sink { [weak self] timeSeriesArray in
+            self?.setupGraphView(timeSeriesArray: timeSeriesArray)
+        }.store(in: &cancellables)
+        
         mainViewModel.timeSeriesErrorPublisher.sink { [weak self] errorMessage in
             self?.timeSeriesErrorLabel.isHidden = false
             self?.timeSeriesErrorLabel.text = errorMessage
         }.store(in: &cancellables)
-        
+    
     }
     
-    private func setupDropDowns(currencies: [String]) {
-        
-        fromCurrenciesDropDown.anchorView = fromView
-        toCurrenciesDropDown.anchorView = toView
-        
-        fromCurrenciesDropDown.dataSource = currencies
-        toCurrenciesDropDown.dataSource = currencies
-        
-        fromCurrenciesDropDown.selectionAction  = { [unowned self] (index: Int, item: String) in
-            fromCurrencyLabel.text = mainViewModel.currencyCodesArray[index]
-            
-        }
-        
-        toCurrenciesDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            toCurrencyLabel.text = mainViewModel.currencyCodesArray[index]
-        }
-        
-        fromCurrencyLabel.text = mainViewModel.currencyCodesArray[0]
-        toCurrencyLabel.text = mainViewModel.currencyCodesArray[1]
-    }
+    
+    
+    //MARK: - Button action functions
     
     @objc func fromViewTapped(_ sender:UITapGestureRecognizer) {
         fromCurrenciesDropDown.show()
@@ -255,6 +283,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func getExchangeRateTapped(_ sender: UIButton) {
+        graphView.removeFromSuperview()
         exchangeRateView.isHidden = true
         timeSeriesErrorLabel.isHidden = true
         mainViewModel.getExchangeRateAndTimeSeries(from: fromCurrencyLabel.text!, to: toCurrencyLabel.text!)

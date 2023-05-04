@@ -9,7 +9,7 @@ import Foundation
 
 struct URLs {
     
-    static let apiKey = "Rpjs1n6QAGgR9ZOr8cHh"
+    static let apiKey = "HIGCTFwyNihKl6dVfNVn"
     static let baseUrl = "https://fxmarketapi.com/"
     
     static let getCurrenciesUrl = baseUrl + "apicurrencies?api_key=" + apiKey
@@ -19,12 +19,11 @@ struct URLs {
     }
     
     static func getTimeSeriesUrl(from: String, to: String, dates: [String]) -> String {
-        
-        let url = baseUrl + "apitimeseries?api_key=" + apiKey + "&currency=" + from + to + "&start_date=" + dates[0] + "&end_date=" + dates[1] + "&format=close"
-        print(url)
-        return url
+        return baseUrl + "apitimeseries?api_key=" + apiKey + "&currency=" + from + to + "&start_date=" + dates[0] + "&end_date=" + dates[1] + "&format=close"
     }
     
+    /// This helper function calculates today's date as well as the date from 30 days ago, but excludes weekends because the api does not take weekend dates
+    /// - Returns: an array of to strings: today's date and the date 30 days ago 
     static func getDatesForTimeSeries() -> [String] {
         
         var currentDate = Date()
@@ -43,7 +42,7 @@ struct URLs {
             previousDateComponents.day! += 9 - previousDateComponents.weekday!
             previousDate = calendar.date(from: previousDateComponents)!
         }
-
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         

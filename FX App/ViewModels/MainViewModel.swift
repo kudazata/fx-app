@@ -14,25 +14,28 @@ class MainViewModel {
     var currencyNamesArray = [String]()
     var currencyCodesArray = [String]()
     var networkService: NetworkServiceProtocol
-    
     let networkErrorPublisher = PassthroughSubject<String, Never>()
     let timeSeriesErrorPublisher = PassthroughSubject<String, Never>()
     let showActivityIndicator = PassthroughSubject<Bool, Never>()
     let currenciesPublisher = PassthroughSubject<[Currency], Never>()
     let exchangeRatePublisher = PassthroughSubject<ExchangeRate, Never>()
     let timeSeriesPublisher = PassthroughSubject<[TimeSeriesPoint], Never>()
-    private let dispatchGroup = DispatchGroup()
-    
     var timeSeriesArray: [TimeSeriesPoint]?
     var exchangeRate: ExchangeRate?
     var networkError: NetworkError?
     var timeSeriesError: String?
+    
+    private let dispatchGroup = DispatchGroup()
     
     init(networkService: NetworkServiceProtocol = NetworkService()) {
         self.networkService = networkService
     }
 
     
+    //MARK: - Network functions
+    
+    
+    /// This function is used to get the available currencies using the NetworkService struct
     func getCurrencies() {
         showActivityIndicator.send(true)
         networkService.getCurrencies(completion: { result in
@@ -49,23 +52,49 @@ class MainViewModel {
         })
     }
     
-    private func populateCurrencies(currenciesResponse: CurrenciesResponse) {
-        for (key, value) in currenciesResponse.currencies {
-            let currency = Currency(currencyCode: key.replacingOccurrences(of: "USD", with: ""), currencyName: value)
-            availableCurrencies.append(currency)
+    /// This function is used to get an exchange rate object
+    /// - Parameters:
+    ///   - from: the code for the currency being converted from eg USD
+    ///   - to: the code for the currency being converted to eg ZAR
+    func getExchangeRate(from: String, to: String) {
+        dispatchGroup.enter()
+        networkService.getExchangeRate(from: from, to: to) { result in
+            switch result {
+            case let .success(exchangeRate):
+                if let exchangeRate = exchangeRate {
+                    self.exchangeRate = exchangeRate
+                }
+            case let .failure(error):
+                self.networkError = error
+                self.networkErrorPublisher.send(error.message)
+            }
+            self.dispatchGroup.leave()
         }
-        
-        ///manually add USD because API doesn't include it
-        let usdCurrency = Currency(currencyCode: "USD", currencyName: "United States Dollar")
-        availableCurrencies.append(usdCurrency)
-        
-        availableCurrencies = availableCurrencies.sorted {$0.currencyName.lowercased() < $1.currencyName.lowercased()}
-        
-        currencyNamesArray = availableCurrencies.map { $0.currencyName }
-        currencyCodesArray = availableCurrencies.map { $0.currencyCode }
-        currenciesPublisher.send(availableCurrencies)
     }
     
+    /// Get a time series for a particular exchange rate
+    /// - Parameters:
+    ///   - from: the code for the currency being converted from eg USD
+    ///   - to: the code for the currency being converted to eg ZAR
+    func getTimeSeries(from: String, to: String) {
+        dispatchGroup.enter()
+        networkService.getTimeSeries(from: from, to: to) { result in
+            switch result {
+            case let .success(timeSeriesResponse):
+                if let timeSeriesResponse = timeSeriesResponse {
+                    self.populateTimeSeries(series: timeSeriesResponse)
+                }
+            case let .failure(error):
+                self.networkError = error
+                self.dispatchGroup.leave()
+            }
+        }
+    }
+    
+    /// This function makes a call to two network functions and makes use of a dispatch group to make these calls at the same time
+    /// - Parameters:
+    ///   - from: the currency being converted from eg USD
+    ///   - to: the currency being converted to eg ZAR
     func getExchangeRateAndTimeSeries(from: String, to: String) {
         
         timeSeriesArray = nil
@@ -94,37 +123,29 @@ class MainViewModel {
         }
     }
     
-    func getExchangeRate(from: String, to: String) {
-        dispatchGroup.enter()
-        networkService.getExchangeRate(from: from, to: to) { result in
-            switch result {
-            case let .success(exchangeRate):
-                if let exchangeRate = exchangeRate {
-                    self.exchangeRate = exchangeRate
-                }
-            case let .failure(error):
-                self.networkError = error
-                self.networkErrorPublisher.send(error.message)
-            }
-            self.dispatchGroup.leave()
+    //MARK: - Helper functions
+    
+    /// This function converts the network response from getting currencies into local usable objects of type [Currency] and [String]
+    /// - Parameter currenciesResponse: response object that comes from network call
+    private func populateCurrencies(currenciesResponse: CurrenciesResponse) {
+        for (key, value) in currenciesResponse.currencies {
+            let currency = Currency(currencyCode: key.replacingOccurrences(of: "USD", with: ""), currencyName: value)
+            availableCurrencies.append(currency)
         }
+        
+        ///manually add USD because API doesn't include it
+        let usdCurrency = Currency(currencyCode: "USD", currencyName: "United States Dollar")
+        availableCurrencies.append(usdCurrency)
+        
+        availableCurrencies = availableCurrencies.sorted {$0.currencyName.lowercased() < $1.currencyName.lowercased()}
+        
+        currencyNamesArray = availableCurrencies.map { $0.currencyName }
+        currencyCodesArray = availableCurrencies.map { $0.currencyCode }
+        currenciesPublisher.send(availableCurrencies)
     }
     
-    func getTimeSeries(from: String, to: String) {
-        dispatchGroup.enter()
-        networkService.getTimeSeries(from: from, to: to) { result in
-            switch result {
-            case let .success(timeSeriesResponse):
-                if let timeSeriesResponse = timeSeriesResponse {
-                    self.populateTimeSeries(series: timeSeriesResponse)
-                }
-            case let .failure(error):
-                self.networkError = error
-                self.dispatchGroup.leave()
-            }
-        }
-    }
-    
+    /// This function converts the time series response object into a usable array of type [TimeSeriesPoint]
+    /// - Parameter series: the response object that comes from the network call
     private func populateTimeSeries(series: TimeSeriesResponse) {
 
         var timePoints = [TimeSeriesPoint]()
