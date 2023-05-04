@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Combine
 
 protocol NetworkServiceProtocol {
-    func getCurrencies(completion: @escaping (Result<CurrenciesResponse?, NetworkError>) -> Void)
-    func getExchangeRate(from: String, to: String, completion: @escaping (Result<ExchangeRate?, NetworkError>) -> Void)
-    func getTimeSeries(from: String, to: String, completion: @escaping (Result<TimeSeriesResponse?, NetworkError>) -> Void)
+    func getCurrencies() -> AnyPublisher<CurrenciesResponse, NetworkError>
+    func getExchangeRate(from: String, to: String) -> AnyPublisher<ExchangeRate, NetworkError> 
+    func getTimeSeries(from: String, to: String) -> AnyPublisher<TimeSeriesResponse, NetworkError>
 }

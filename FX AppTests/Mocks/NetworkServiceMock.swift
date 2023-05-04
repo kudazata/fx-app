@@ -7,15 +7,16 @@
 
 import Foundation
 @testable import FX_App
+import Combine
 
 struct NetworkServiceMock: NetworkServiceProtocol {
     
     var shouldFail = false
     
-    func getCurrencies(completion: @escaping (Result<CurrenciesResponse?, NetworkError>) -> Void) {
+    func getCurrencies() -> AnyPublisher<CurrenciesResponse, NetworkError> {
         
         if shouldFail {
-            completion(.failure(.noData))
+            return Fail(error: NetworkError.noData).eraseToAnyPublisher()
         }
         else {
             let currencies = [
@@ -65,26 +66,32 @@ struct NetworkServiceMock: NetworkServiceProtocol {
             
             let currenciesResponse = CurrenciesResponse(currencies: currencies)
             
-            completion(.success(currenciesResponse))
+            return Just(currenciesResponse)
+                .setFailureType(to: NetworkError.self)
+                .eraseToAnyPublisher()
         }
         
     }
     
-    func getExchangeRate(from: String, to: String, completion: @escaping (Result<ExchangeRate?, NetworkError>) -> Void) {
+    func getExchangeRate(from: String, to: String) -> AnyPublisher<ExchangeRate, NetworkError> {
         
         if shouldFail {
-            completion(.failure(.noData))
+            return Fail(error: NetworkError.noData).eraseToAnyPublisher()
         }
         else {
+            
             let exchangeRate = ExchangeRate(from: "USD", price: 18.55, timestamp: 1683100645, to: "ZAR", total: 18.55)
-            completion(.success(exchangeRate))
+            
+            return Just(exchangeRate)
+                .setFailureType(to: NetworkError.self)
+                .eraseToAnyPublisher()
         }
     }
     
-    func getTimeSeries(from: String, to: String, completion: @escaping (Result<TimeSeriesResponse?, NetworkError>) -> Void) {
+    func getTimeSeries(from: String, to: String) -> AnyPublisher<TimeSeriesResponse, NetworkError> {
         
         if shouldFail {
-            completion(.failure(.badRequest))
+            return Fail(error: NetworkError.badRequest).eraseToAnyPublisher()
         }
         else {
             
@@ -163,7 +170,9 @@ struct NetworkServiceMock: NetworkServiceProtocol {
             
             let timeSeriesResponse = TimeSeriesResponse(endDate: "2023-05-03", startDate: "2023-04-03", price: prices, error: nil)
             
-            completion(.success(timeSeriesResponse))
+            return Just(timeSeriesResponse)
+                .setFailureType(to: NetworkError.self)
+                .eraseToAnyPublisher()
             
         }
     }

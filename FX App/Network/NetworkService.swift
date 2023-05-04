@@ -6,101 +6,64 @@
 //
 
 import Foundation
+import Combine
 
 struct NetworkService: NetworkServiceProtocol {
     
-    /// Generic network caller that can take in and return any type of object
-    /// - Parameters:
-    ///    - resource: object of type GenericResource to be used for the network call
-    ///    - completion: Code to be executed by the caller. Will contain type Result
-    func makeNetworkCall<T>(resource: GenericResource<T>, completion: @escaping (Result<T?, NetworkError>) -> Void) {
+    /// Network function to get currencies from the server
+    /// - Returns: <#description#>
+    func getCurrencies() -> AnyPublisher<CurrenciesResponse, NetworkError> {
         
-        guard let url = URL(string: resource.urlString) else {
-            completion(.failure(.badUrl))
-            return
+        let urlString = URLs.getCurrenciesUrl
+        
+        guard let url = URL(string: urlString) else {
+            return Fail(error: NetworkError.badUrl).eraseToAnyPublisher()
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            
-            DispatchQueue.main.async {
-                if let error = error {
-                    completion(.failure(.customError(error)))
-                    return
-                }
-                
-                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-                
-                guard (200..<300).contains(statusCode) else {
-                    completion(.failure(.badRequest))
-                    return
-                }
-                
-                guard let data = data else {
-                    completion(.failure(.noData))
-                    return
-                }
-                
-                completion(.success(resource.parse(data)))
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map{$0.data}
+            .decode(type: CurrenciesResponse.self, decoder: JSONDecoder())
+            .map {
+                $0 as CurrenciesResponse
             }
-            
-        }.resume()
+            .mapError { error -> NetworkError in
+                return NetworkError.customError(error)
+            }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
         
     }
     
-    /// Network function to get currencies from the server
-    /// - Parameters:
-    ///    - completion: Code to be executed by the caller. Will contain type Result
-    func getCurrencies(completion: @escaping (Result<CurrenciesResponse?, NetworkError>) -> Void) {
-        
-        let resource = GenericResource<CurrenciesResponse>(urlString: URLs.getCurrenciesUrl) { data in
-            do {
-                let currenciesResponse = try JSONDecoder().decode(CurrenciesResponse.self, from: data)
-                return currenciesResponse
-            }
-            catch {
-                completion(.failure(.decodingError))
-                return nil
-            }
-        }
-        
-        makeNetworkCall(resource: resource) { result in
-            switch result {
-            case let .success(currenciesResponse):
-                completion(.success(currenciesResponse))
-            case let .failure(error):
-                completion(.failure(error))
-            }
-        }
-    }
     
     /// Network function to get an exchange rate from the server
     /// - Parameters:
     ///    - from: The base currency
     ///    - to: the currency being converted to
-    ///    - completion: Code to be executed by the caller. Will contain type Result
-    func getExchangeRate(from: String, to: String, completion: @escaping (Result<ExchangeRate?, NetworkError>) -> Void) {
+    /// - Returns: <#description#>
+    func getExchangeRate(from: String, to: String) -> AnyPublisher<ExchangeRate, NetworkError> {
         
         let urlString = URLs.getExchangeRateUrl(from: from, to: to)
-        let resource = GenericResource<ExchangeRate>(urlString: urlString) { data in
-            do {
-                let exchangeRate = try JSONDecoder().decode(ExchangeRate.self, from: data)
-                return exchangeRate
-            }
-            catch {
-                completion(.failure(.decodingError))
-                return nil
-            }
+        
+        guard let url = URL(string: urlString) else {
+            return Fail(error: NetworkError.badUrl).eraseToAnyPublisher()
         }
         
-        makeNetworkCall(resource: resource) { result in
-            switch result {
-            case let .success(exchangeRate):
-                completion(.success(exchangeRate))
-            case let .failure(error):
-                completion(.failure(error))
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map{$0.data}
+            .decode(type: ExchangeRate.self, decoder: JSONDecoder())
+            .map {
+                $0 as ExchangeRate
             }
-        }
-        
+            .mapError { error -> NetworkError in
+                switch error {
+                case is DecodingError:
+                    return NetworkError.decodingError
+                default:
+                    return NetworkError.customError(error)
+                }
+            }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
     
     
@@ -108,34 +71,36 @@ struct NetworkService: NetworkServiceProtocol {
     /// - Parameters:
     ///    - from: The base currency
     ///    - to: the currency being converted to
-    ///    - completion: Code to be executed by the caller. Will contain type Result
-    func getTimeSeries(from: String, to: String, completion: @escaping (Result<TimeSeriesResponse?, NetworkError>) -> Void) {
+    /// - Returns: <#description#>
+    func getTimeSeries(from: String, to: String) -> AnyPublisher<TimeSeriesResponse, NetworkError> {
         
         let dates = URLs.getDatesForTimeSeries()
         let urlString = URLs.getTimeSeriesUrl(from: from, to: to, dates: dates)
-        let resource = GenericResource<TimeSeriesResponse>(urlString: urlString) { data in
-            
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let timeSeriesResponse = try decoder.decode(TimeSeriesResponse.self, from: data)
-                return timeSeriesResponse
-            }
-            catch {
-                completion(.failure(.decodingError))
-                print(error)
-                return nil
-            }
+        
+        guard let url = URL(string: urlString) else {
+            return Fail(error: NetworkError.badUrl).eraseToAnyPublisher()
         }
         
-        makeNetworkCall(resource: resource) { result in
-            switch result {
-            case let .success(timeSeriesResponse):
-                completion(.success(timeSeriesResponse))
-            case let.failure(error):
-                completion(.failure(error))
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map{$0.data}
+            .decode(type: TimeSeriesResponse.self, decoder: decoder)
+            .map {
+                $0 as TimeSeriesResponse
             }
-        }
+            .mapError { error -> NetworkError in
+                switch error {
+                case is DecodingError:
+                    return NetworkError.decodingError
+                default:
+                    return NetworkError.customError(error)
+                }
+            }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+        
     }
     
     

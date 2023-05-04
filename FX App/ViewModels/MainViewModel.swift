@@ -24,6 +24,7 @@ class MainViewModel {
     var exchangeRate: ExchangeRate?
     var networkError: NetworkError?
     var timeSeriesError: String?
+    var cancellables = Set<AnyCancellable>()
     
     private let dispatchGroup = DispatchGroup()
     
@@ -34,22 +35,24 @@ class MainViewModel {
     
     //MARK: - Network functions
     
-    
     /// This function is used to get the available currencies using the NetworkService struct
     func getCurrencies() {
         showActivityIndicator.send(true)
-        networkService.getCurrencies(completion: { result in
-            self.showActivityIndicator.send(false)
-            switch result {
-            case let .success(currenciesResponse):
-                if let response = currenciesResponse {
-                    self.populateCurrencies(currenciesResponse: response)
+        
+        networkService.getCurrencies()
+            .sink { completion in
+                self.showActivityIndicator.send(false)
+                switch completion {
+                case .finished:
+                    print("done")
+                case .failure(let error):
+                    self.networkError = error
+                    self.networkErrorPublisher.send(error.message)
                 }
-            case let  .failure(error):
-                self.networkError = error
-                self.networkErrorPublisher.send(error.message)
-            }
-        })
+            } receiveValue: { currenciesResponse in
+                self.populateCurrencies(currenciesResponse: currenciesResponse)
+            }.store(in: &cancellables)
+
     }
     
     /// This function is used to get an exchange rate object
@@ -58,18 +61,18 @@ class MainViewModel {
     ///   - to: the code for the currency being converted to eg ZAR
     func getExchangeRate(from: String, to: String) {
         dispatchGroup.enter()
-        networkService.getExchangeRate(from: from, to: to) { result in
-            switch result {
-            case let .success(exchangeRate):
-                if let exchangeRate = exchangeRate {
-                    self.exchangeRate = exchangeRate
+        networkService.getExchangeRate(from: from, to: to)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("done")
+                case .failure(let error):
+                    self.networkError = error
                 }
-            case let .failure(error):
-                self.networkError = error
-                self.networkErrorPublisher.send(error.message)
-            }
-            self.dispatchGroup.leave()
-        }
+                self.dispatchGroup.leave()
+            } receiveValue: { exchangeRate in
+                self.exchangeRate = exchangeRate
+            }.store(in: &cancellables)
     }
     
     /// Get a time series for a particular exchange rate
@@ -77,18 +80,19 @@ class MainViewModel {
     ///   - from: the code for the currency being converted from eg USD
     ///   - to: the code for the currency being converted to eg ZAR
     func getTimeSeries(from: String, to: String) {
-        dispatchGroup.enter()
-        networkService.getTimeSeries(from: from, to: to) { result in
-            switch result {
-            case let .success(timeSeriesResponse):
-                if let timeSeriesResponse = timeSeriesResponse {
-                    self.populateTimeSeries(series: timeSeriesResponse)
+        self.dispatchGroup.enter()
+        networkService.getTimeSeries(from: from, to: to)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("finished")
+                case .failure(let error):
+                    self.networkError = error
                 }
-            case let .failure(error):
-                self.networkError = error
                 self.dispatchGroup.leave()
-            }
-        }
+            } receiveValue: { timeSeriesResponse in
+                self.populateTimeSeries(series: timeSeriesResponse)
+            }.store(in: &cancellables)
     }
     
     /// This function makes a call to two network functions and makes use of a dispatch group to make these calls at the same time
@@ -102,7 +106,7 @@ class MainViewModel {
         
         self.getExchangeRate(from: from, to: to)
         self.getTimeSeries(from: from, to: to)
-        
+
         showActivityIndicator.send(true)
         self.dispatchGroup.notify(queue: .main) {
             self.showActivityIndicator.send(false)
@@ -151,7 +155,6 @@ class MainViewModel {
         var timePoints = [TimeSeriesPoint]()
         
         guard let prices = series.price else {
-            dispatchGroup.leave()
             return
         }
 
@@ -166,7 +169,6 @@ class MainViewModel {
 
         let sortedTimePoints = timePoints.sorted {$1.date > $0.date}
         self.timeSeriesArray = sortedTimePoints
-        self.dispatchGroup.leave()
         
     }
 }
