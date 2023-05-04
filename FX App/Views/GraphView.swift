@@ -9,7 +9,6 @@ import SwiftUI
 import Charts
 
 
-@available(iOS 16.0, *)
 struct GraphView: View {
     
     let timeSeriesArray: [TimeSeriesPoint]
@@ -28,7 +27,6 @@ struct GraphView: View {
     }
 }
 
-@available(iOS 16.0, *)
 struct GraphView_Previews: PreviewProvider {
     static var previews: some View {
         GraphView(timeSeriesArray: [TimeSeriesPoint]())

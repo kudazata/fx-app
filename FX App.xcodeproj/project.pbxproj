@@ -14,8 +14,6 @@
 		D110964C2A025B0000FBC54B /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D110964B2A025B0000FBC54B /* CommonFunctions.swift */; };
 		D13D004229FD066000560D56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D004129FD066000560D56 /* AppDelegate.swift */; };
 		D13D004429FD066000560D56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D004329FD066000560D56 /* SceneDelegate.swift */; };
-		D13D004629FD066000560D56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D004529FD066000560D56 /* ViewController.swift */; };
-		D13D004929FD066000560D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D13D004729FD066000560D56 /* Main.storyboard */; };
 		D13D004C29FD066000560D56 /* FX_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D13D004A29FD066000560D56 /* FX_App.xcdatamodeld */; };
 		D13D004E29FD066200560D56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D13D004D29FD066200560D56 /* Assets.xcassets */; };
 		D13D005129FD066200560D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D13D004F29FD066200560D56 /* LaunchScreen.storyboard */; };
@@ -35,6 +33,9 @@
 		D1886EFB2A0082690013D84E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1886EFA2A0082690013D84E /* MainViewModel.swift */; };
 		D1A5D2CB2A0155F200241388 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A5D2CA2A0155F200241388 /* MainViewModelTests.swift */; };
 		D1A5D2CE2A01564600241388 /* NetworkServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A5D2CD2A01564600241388 /* NetworkServiceMock.swift */; };
+		D1F05AC42A04045E00775D39 /* MainViewController+bindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F05AC32A04045E00775D39 /* MainViewController+bindings.swift */; };
+		D1F05AC62A0405DC00775D39 /* MainViewController+constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F05AC52A0405DC00775D39 /* MainViewController+constraints.swift */; };
+		D1F05AC82A0406AE00775D39 /* MainViewController+styleViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F05AC72A0406AE00775D39 /* MainViewController+styleViews.swift */; };
 		F1C3E9671562721A95EE3078 /* Pods_FX_App_FX_AppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9982C36B5653F6EE72F29F1C /* Pods_FX_App_FX_AppUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,8 +70,6 @@
 		D13D003E29FD066000560D56 /* FX App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FX App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13D004129FD066000560D56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D13D004329FD066000560D56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D13D004529FD066000560D56 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D13D004829FD066000560D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D13D004B29FD066000560D56 /* FX_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FX_App.xcdatamodel; sourceTree = "<group>"; };
 		D13D004D29FD066200560D56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D13D005029FD066200560D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -93,6 +92,9 @@
 		D1886EFA2A0082690013D84E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		D1A5D2CA2A0155F200241388 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		D1A5D2CD2A01564600241388 /* NetworkServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceMock.swift; sourceTree = "<group>"; };
+		D1F05AC32A04045E00775D39 /* MainViewController+bindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+bindings.swift"; sourceTree = "<group>"; };
+		D1F05AC52A0405DC00775D39 /* MainViewController+constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+constraints.swift"; sourceTree = "<group>"; };
+		D1F05AC72A0406AE00775D39 /* MainViewController+styleViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+styleViews.swift"; sourceTree = "<group>"; };
 		EDCE574A96A35CD28BFECB82 /* Pods-FX App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FX App.debug.xcconfig"; path = "Target Support Files/Pods-FX App/Pods-FX App.debug.xcconfig"; sourceTree = "<group>"; };
 		F8DAC229DB3791F524E1DBE5 /* Pods-FX AppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FX AppTests.debug.xcconfig"; path = "Target Support Files/Pods-FX AppTests/Pods-FX AppTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,8 +180,6 @@
 				D13D007429FD0BCF00560D56 /* Utils */,
 				D13D004129FD066000560D56 /* AppDelegate.swift */,
 				D13D004329FD066000560D56 /* SceneDelegate.swift */,
-				D13D004529FD066000560D56 /* ViewController.swift */,
-				D13D004729FD066000560D56 /* Main.storyboard */,
 				D13D004D29FD066200560D56 /* Assets.xcassets */,
 				D13D004F29FD066200560D56 /* LaunchScreen.storyboard */,
 				D13D005229FD066200560D56 /* Info.plist */,
@@ -243,6 +243,9 @@
 			isa = PBXGroup;
 			children = (
 				D1886EF72A007BF20013D84E /* MainViewController.swift */,
+				D1F05AC32A04045E00775D39 /* MainViewController+bindings.swift */,
+				D1F05AC52A0405DC00775D39 /* MainViewController+constraints.swift */,
+				D1F05AC72A0406AE00775D39 /* MainViewController+styleViews.swift */,
 				D11096472A024F1100FBC54B /* GraphView.swift */,
 			);
 			path = Views;
@@ -385,7 +388,6 @@
 			files = (
 				D13D005129FD066200560D56 /* LaunchScreen.storyboard in Resources */,
 				D13D004E29FD066200560D56 /* Assets.xcassets in Resources */,
-				D13D004929FD066000560D56 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,12 +519,14 @@
 				D110964A2A02553A00FBC54B /* Extensions.swift in Sources */,
 				D13D008A29FD7CF900560D56 /* NetworkError.swift in Sources */,
 				D13D007629FD0BDF00560D56 /* URLs.swift in Sources */,
-				D13D004629FD066000560D56 /* ViewController.swift in Sources */,
 				D13D008129FD689900560D56 /* TimeSeriesPoint.swift in Sources */,
 				D13D004C29FD066000560D56 /* FX_App.xcdatamodeld in Sources */,
+				D1F05AC82A0406AE00775D39 /* MainViewController+styleViews.swift in Sources */,
 				D13D007929FD202C00560D56 /* CurrenciesResponse.swift in Sources */,
 				D13D007D29FD2A1600560D56 /* ExchangeRate.swift in Sources */,
 				D13D007F29FD2C8200560D56 /* TimeSeriesResponse.swift in Sources */,
+				D1F05AC42A04045E00775D39 /* MainViewController+bindings.swift in Sources */,
+				D1F05AC62A0405DC00775D39 /* MainViewController+constraints.swift in Sources */,
 				D1886EF82A007BF20013D84E /* MainViewController.swift in Sources */,
 				D13D008829FD7AA700560D56 /* GenericResource.swift in Sources */,
 				D13D008629FD779F00560D56 /* NetworkServiceProtocol.swift in Sources */,
@@ -569,14 +573,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D13D004729FD066000560D56 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D13D004829FD066000560D56 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D13D004F29FD066200560D56 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -717,9 +713,10 @@
 				INFOPLIST_FILE = "FX App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -727,9 +724,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Kuda-Zata.FX-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -746,9 +746,10 @@
 				INFOPLIST_FILE = "FX App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -756,9 +757,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Kuda-Zata.FX-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -772,7 +776,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XG7JRH745R;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -798,7 +802,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XG7JRH745R;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

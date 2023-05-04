@@ -6,7 +6,6 @@
 //
 
 import XCTest
-import Combine
 @testable import FX_App
 
 class MainViewModelTests: XCTestCase {
@@ -15,7 +14,6 @@ class MainViewModelTests: XCTestCase {
     var networkServiceMock = NetworkServiceMock()
     var exchangeRate: ExchangeRate!
     var timeSeriesArray: [TimeSeriesPoint]!
-    private var cancellables = Set<AnyCancellable>()
 
     override func setUpWithError() throws {
         sut = MainViewModel(networkService: networkServiceMock)
