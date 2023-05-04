@@ -11,7 +11,7 @@ import Combine
 struct NetworkService: NetworkServiceProtocol {
     
     /// Network function to get currencies from the server
-    /// - Returns: <#description#>
+    /// - Returns: A publisher that emits an CurrenciesResponse object or a NetworkError.
     func getCurrencies() -> AnyPublisher<CurrenciesResponse, NetworkError> {
         
         let urlString = URLs.getCurrenciesUrl
@@ -39,7 +39,7 @@ struct NetworkService: NetworkServiceProtocol {
     /// - Parameters:
     ///    - from: The base currency
     ///    - to: the currency being converted to
-    /// - Returns: <#description#>
+    /// - Returns: A publisher that emits an ExchangeRate object or a NetworkError.
     func getExchangeRate(from: String, to: String) -> AnyPublisher<ExchangeRate, NetworkError> {
         
         let urlString = URLs.getExchangeRateUrl(from: from, to: to)
@@ -71,7 +71,7 @@ struct NetworkService: NetworkServiceProtocol {
     /// - Parameters:
     ///    - from: The base currency
     ///    - to: the currency being converted to
-    /// - Returns: <#description#>
+    /// - Returns: A publisher that emits an TimeSeriesResponse object or a NetworkError.
     func getTimeSeries(from: String, to: String) -> AnyPublisher<TimeSeriesResponse, NetworkError> {
         
         let dates = URLs.getDatesForTimeSeries()
