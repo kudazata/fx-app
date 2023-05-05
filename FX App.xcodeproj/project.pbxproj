@@ -11,7 +11,6 @@
 		80C09BA3C8D4EED3AB5B8042 /* Pods_FX_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A4B3DAC2F437E314C307F4 /* Pods_FX_App.framework */; };
 		D11096482A024F1100FBC54B /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11096472A024F1100FBC54B /* GraphView.swift */; };
 		D110964A2A02553A00FBC54B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11096492A02553A00FBC54B /* Extensions.swift */; };
-		D110964C2A025B0000FBC54B /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D110964B2A025B0000FBC54B /* CommonFunctions.swift */; };
 		D13D004229FD066000560D56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D004129FD066000560D56 /* AppDelegate.swift */; };
 		D13D004429FD066000560D56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D004329FD066000560D56 /* SceneDelegate.swift */; };
 		D13D004C29FD066000560D56 /* FX_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D13D004A29FD066000560D56 /* FX_App.xcdatamodeld */; };
@@ -66,7 +65,6 @@
 		BBEF6D71CFCA3DE467A02A06 /* Pods_FX_AppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FX_AppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D11096472A024F1100FBC54B /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		D11096492A02553A00FBC54B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		D110964B2A025B0000FBC54B /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 		D13D003E29FD066000560D56 /* FX App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FX App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13D004129FD066000560D56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D13D004329FD066000560D56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -211,7 +209,6 @@
 			children = (
 				D13D007529FD0BDF00560D56 /* URLs.swift */,
 				D11096492A02553A00FBC54B /* Extensions.swift */,
-				D110964B2A025B0000FBC54B /* CommonFunctions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -530,7 +527,6 @@
 				D1886EF82A007BF20013D84E /* MainViewController.swift in Sources */,
 				D13D008829FD7AA700560D56 /* GenericResource.swift in Sources */,
 				D13D008629FD779F00560D56 /* NetworkServiceProtocol.swift in Sources */,
-				D110964C2A025B0000FBC54B /* CommonFunctions.swift in Sources */,
 				D13D004229FD066000560D56 /* AppDelegate.swift in Sources */,
 				D11096482A024F1100FBC54B /* GraphView.swift in Sources */,
 				D13D007B29FD206800560D56 /* Currency.swift in Sources */,

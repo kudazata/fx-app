@@ -13,9 +13,7 @@ extension MainViewController {
     func bindViewModel() {
         
         mainViewModel.networkErrorPublisher.sink { [weak self] errorMessage in
-            if let self = self {
-                showGeneralAlert(title: "Error", message: errorMessage, vc: self)
-            }
+            self?.showGeneralAlert(title: "Error", message: errorMessage)
         }.store(in: &cancellables)
         
         mainViewModel.showActivityIndicator.sink { [weak self] showIndicator in

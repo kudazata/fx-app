@@ -15,6 +15,7 @@ struct URLs {
     static let getCurrenciesUrl = baseUrl + "apicurrencies?api_key=" + apiKey
     
     static func getExchangeRateUrl(from: String, to: String) -> String {
+        print(baseUrl + "apiconvert?api_key=" + apiKey + "&from=\(from)&to=" + to + "&amount=1")
         return baseUrl + "apiconvert?api_key=" + apiKey + "&from=\(from)&to=" + to + "&amount=1"
     }
     

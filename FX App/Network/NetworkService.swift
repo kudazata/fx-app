@@ -57,7 +57,7 @@ struct NetworkService: NetworkServiceProtocol {
             .mapError { error -> NetworkError in
                 switch error {
                 case is DecodingError:
-                    return NetworkError.decodingError
+                    return NetworkError.badRequest
                 default:
                     return NetworkError.customError(error)
                 }
@@ -93,7 +93,7 @@ struct NetworkService: NetworkServiceProtocol {
             .mapError { error -> NetworkError in
                 switch error {
                 case is DecodingError:
-                    return NetworkError.decodingError
+                    return NetworkError.badRequest
                 default:
                     return NetworkError.customError(error)
                 }
@@ -102,6 +102,5 @@ struct NetworkService: NetworkServiceProtocol {
             .eraseToAnyPublisher()
         
     }
-    
     
 }

@@ -40,17 +40,17 @@ class MainViewModel {
         showActivityIndicator.send(true)
         
         networkService.getCurrencies()
-            .sink { completion in
-                self.showActivityIndicator.send(false)
+            .sink { [weak self] completion in
+                self?.showActivityIndicator.send(false)
                 switch completion {
                 case .finished:
                     print("done")
                 case .failure(let error):
-                    self.networkError = error
-                    self.networkErrorPublisher.send(error.message)
+                    self?.networkError = error
+                    self?.networkErrorPublisher.send(error.message)
                 }
-            } receiveValue: { currenciesResponse in
-                self.populateCurrencies(currenciesResponse: currenciesResponse)
+            } receiveValue: { [weak self] currenciesResponse in
+                self?.populateCurrencies(currenciesResponse: currenciesResponse)
             }.store(in: &cancellables)
 
     }
@@ -62,16 +62,16 @@ class MainViewModel {
     func getExchangeRate(from: String, to: String) {
         dispatchGroup.enter()
         networkService.getExchangeRate(from: from, to: to)
-            .sink { completion in
+            .sink { [weak self] completion in
                 switch completion {
                 case .finished:
                     print("done")
                 case .failure(let error):
-                    self.networkError = error
+                    self?.networkError = error
                 }
-                self.dispatchGroup.leave()
-            } receiveValue: { exchangeRate in
-                self.exchangeRate = exchangeRate
+                self?.dispatchGroup.leave()
+            } receiveValue: { [weak self] exchangeRate in
+                self?.exchangeRate = exchangeRate
             }.store(in: &cancellables)
     }
     
@@ -82,16 +82,16 @@ class MainViewModel {
     func getTimeSeries(from: String, to: String) {
         self.dispatchGroup.enter()
         networkService.getTimeSeries(from: from, to: to)
-            .sink { completion in
+            .sink { [weak self] completion in
                 switch completion {
                 case .finished:
                     print("finished")
                 case .failure(let error):
-                    self.networkError = error
+                    self?.networkError = error
                 }
-                self.dispatchGroup.leave()
-            } receiveValue: { timeSeriesResponse in
-                self.populateTimeSeries(series: timeSeriesResponse)
+                self?.dispatchGroup.leave()
+            } receiveValue: { [weak self] timeSeriesResponse in
+                self?.populateTimeSeries(series: timeSeriesResponse)
             }.store(in: &cancellables)
     }
     
@@ -103,16 +103,18 @@ class MainViewModel {
         
         timeSeriesArray = nil
         exchangeRate = nil
+        networkError = nil
         
         self.getExchangeRate(from: from, to: to)
         self.getTimeSeries(from: from, to: to)
 
         showActivityIndicator.send(true)
+        
         self.dispatchGroup.notify(queue: .main) {
             self.showActivityIndicator.send(false)
             if let error = self.networkError {
                 self.networkErrorPublisher.send(error.message)
-                return
+                //return
             }
             if let exchangeRate = self.exchangeRate {
                 self.exchangeRatePublisher.send(exchangeRate)
@@ -159,7 +161,7 @@ class MainViewModel {
         }
 
         for (key, value) in prices {
-            let date = convertStringToDate(dateString: key)
+            let date = key.convertToDate()
             var timePoint = TimeSeriesPoint(date: date, exchangeRate: 0)
             for (_, value) in value {
                 timePoint.exchangeRate = value
