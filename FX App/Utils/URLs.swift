@@ -9,7 +9,7 @@ import Foundation
 
 struct URLs {
     
-    static let apiKey = "HIGCTFwyNihKl6dVfNVn"
+    static let apiKey = AppConfig.apiKey ?? ""
     static let baseUrl = "https://fxmarketapi.com/"
     
     static let getCurrenciesUrl = baseUrl + "apicurrencies?api_key=" + apiKey

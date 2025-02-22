@@ -13,11 +13,8 @@
 		D110964A2A02553A00FBC54B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11096492A02553A00FBC54B /* Extensions.swift */; };
 		D13D004229FD066000560D56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D004129FD066000560D56 /* AppDelegate.swift */; };
 		D13D004429FD066000560D56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D004329FD066000560D56 /* SceneDelegate.swift */; };
-		D13D004C29FD066000560D56 /* FX_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D13D004A29FD066000560D56 /* FX_App.xcdatamodeld */; };
 		D13D004E29FD066200560D56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D13D004D29FD066200560D56 /* Assets.xcassets */; };
 		D13D005129FD066200560D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D13D004F29FD066200560D56 /* LaunchScreen.storyboard */; };
-		D13D006629FD066300560D56 /* FX_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D006529FD066300560D56 /* FX_AppUITests.swift */; };
-		D13D006829FD066300560D56 /* FX_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D006729FD066300560D56 /* FX_AppUITestsLaunchTests.swift */; };
 		D13D007629FD0BDF00560D56 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D007529FD0BDF00560D56 /* URLs.swift */; };
 		D13D007929FD202C00560D56 /* CurrenciesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D007829FD202C00560D56 /* CurrenciesResponse.swift */; };
 		D13D007B29FD206800560D56 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D007A29FD206800560D56 /* Currency.swift */; };
@@ -32,6 +29,9 @@
 		D1886EFB2A0082690013D84E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1886EFA2A0082690013D84E /* MainViewModel.swift */; };
 		D1A5D2CB2A0155F200241388 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A5D2CA2A0155F200241388 /* MainViewModelTests.swift */; };
 		D1A5D2CE2A01564600241388 /* NetworkServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A5D2CD2A01564600241388 /* NetworkServiceMock.swift */; };
+		D1C298DC2D69BA5F0089E806 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C298DB2D69BA570089E806 /* AppConfig.swift */; };
+		D1C298DE2D69BABA0089E806 /* AppConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D1C298DD2D69BABA0089E806 /* AppConfig.xcconfig */; };
+		D1C298E02D69BAD40089E806 /* AppConfig.sample.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D1C298DF2D69BAD40089E806 /* AppConfig.sample.xcconfig */; };
 		D1F05AC42A04045E00775D39 /* MainViewController+bindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F05AC32A04045E00775D39 /* MainViewController+bindings.swift */; };
 		D1F05AC62A0405DC00775D39 /* MainViewController+constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F05AC52A0405DC00775D39 /* MainViewController+constraints.swift */; };
 		D1F05AC82A0406AE00775D39 /* MainViewController+styleViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F05AC72A0406AE00775D39 /* MainViewController+styleViews.swift */; };
@@ -68,14 +68,11 @@
 		D13D003E29FD066000560D56 /* FX App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FX App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13D004129FD066000560D56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D13D004329FD066000560D56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D13D004B29FD066000560D56 /* FX_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FX_App.xcdatamodel; sourceTree = "<group>"; };
 		D13D004D29FD066200560D56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D13D005029FD066200560D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D13D005229FD066200560D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D13D005729FD066200560D56 /* FX AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FX AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13D006129FD066300560D56 /* FX AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FX AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D13D006529FD066300560D56 /* FX_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FX_AppUITests.swift; sourceTree = "<group>"; };
-		D13D006729FD066300560D56 /* FX_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FX_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D13D007529FD0BDF00560D56 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
 		D13D007829FD202C00560D56 /* CurrenciesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesResponse.swift; sourceTree = "<group>"; };
 		D13D007A29FD206800560D56 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
@@ -90,6 +87,9 @@
 		D1886EFA2A0082690013D84E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		D1A5D2CA2A0155F200241388 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		D1A5D2CD2A01564600241388 /* NetworkServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceMock.swift; sourceTree = "<group>"; };
+		D1C298DB2D69BA570089E806 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		D1C298DD2D69BABA0089E806 /* AppConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppConfig.xcconfig; sourceTree = "<group>"; };
+		D1C298DF2D69BAD40089E806 /* AppConfig.sample.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppConfig.sample.xcconfig; sourceTree = "<group>"; };
 		D1F05AC32A04045E00775D39 /* MainViewController+bindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+bindings.swift"; sourceTree = "<group>"; };
 		D1F05AC52A0405DC00775D39 /* MainViewController+constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+constraints.swift"; sourceTree = "<group>"; };
 		D1F05AC72A0406AE00775D39 /* MainViewController+styleViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+styleViews.swift"; sourceTree = "<group>"; };
@@ -151,7 +151,6 @@
 			children = (
 				D13D004029FD066000560D56 /* FX App */,
 				D13D005A29FD066200560D56 /* FX AppTests */,
-				D13D006429FD066300560D56 /* FX AppUITests */,
 				D13D003F29FD066000560D56 /* Products */,
 				3D77BC5FB1FC47A8D908472C /* Pods */,
 				DF2BA05895A50C4589F1355F /* Frameworks */,
@@ -181,7 +180,8 @@
 				D13D004D29FD066200560D56 /* Assets.xcassets */,
 				D13D004F29FD066200560D56 /* LaunchScreen.storyboard */,
 				D13D005229FD066200560D56 /* Info.plist */,
-				D13D004A29FD066000560D56 /* FX_App.xcdatamodeld */,
+				D1C298DD2D69BABA0089E806 /* AppConfig.xcconfig */,
+				D1C298DF2D69BAD40089E806 /* AppConfig.sample.xcconfig */,
 			);
 			path = "FX App";
 			sourceTree = "<group>";
@@ -195,18 +195,10 @@
 			path = "FX AppTests";
 			sourceTree = "<group>";
 		};
-		D13D006429FD066300560D56 /* FX AppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				D13D006529FD066300560D56 /* FX_AppUITests.swift */,
-				D13D006729FD066300560D56 /* FX_AppUITestsLaunchTests.swift */,
-			);
-			path = "FX AppUITests";
-			sourceTree = "<group>";
-		};
 		D13D007429FD0BCF00560D56 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				D1C298DB2D69BA570089E806 /* AppConfig.swift */,
 				D13D007529FD0BDF00560D56 /* URLs.swift */,
 				D11096492A02553A00FBC54B /* Extensions.swift */,
 			);
@@ -384,7 +376,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D13D005129FD066200560D56 /* LaunchScreen.storyboard in Resources */,
+				D1C298DE2D69BABA0089E806 /* AppConfig.xcconfig in Resources */,
 				D13D004E29FD066200560D56 /* Assets.xcassets in Resources */,
+				D1C298E02D69BAD40089E806 /* AppConfig.sample.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,9 +509,9 @@
 				D13D008429FD777F00560D56 /* NetworkService.swift in Sources */,
 				D110964A2A02553A00FBC54B /* Extensions.swift in Sources */,
 				D13D008A29FD7CF900560D56 /* NetworkError.swift in Sources */,
+				D1C298DC2D69BA5F0089E806 /* AppConfig.swift in Sources */,
 				D13D007629FD0BDF00560D56 /* URLs.swift in Sources */,
 				D13D008129FD689900560D56 /* TimeSeriesPoint.swift in Sources */,
-				D13D004C29FD066000560D56 /* FX_App.xcdatamodeld in Sources */,
 				D1F05AC82A0406AE00775D39 /* MainViewController+styleViews.swift in Sources */,
 				D13D007929FD202C00560D56 /* CurrenciesResponse.swift in Sources */,
 				D13D007D29FD2A1600560D56 /* ExchangeRate.swift in Sources */,
@@ -548,8 +542,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D13D006829FD066300560D56 /* FX_AppUITestsLaunchTests.swift in Sources */,
-				D13D006629FD066300560D56 /* FX_AppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,6 +574,7 @@
 /* Begin XCBuildConfiguration section */
 		D13D006929FD066300560D56 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C298DD2D69BABA0089E806 /* AppConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -643,6 +636,7 @@
 		};
 		D13D006A29FD066300560D56 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C298DD2D69BABA0089E806 /* AppConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -766,7 +760,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F8DAC229DB3791F524E1DBE5 /* Pods-FX AppTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -792,7 +785,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7F17259494ECD2D4B9F276EF /* Pods-FX AppTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -818,7 +810,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 752F1DFFC07B47AB55099159 /* Pods-FX App-FX AppUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XG7JRH745R;
@@ -842,7 +833,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5CC2DF88580A6C9986CDFD47 /* Pods-FX App-FX AppUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XG7JRH745R;
@@ -902,19 +892,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		D13D004A29FD066000560D56 /* FX_App.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				D13D004B29FD066000560D56 /* FX_App.xcdatamodel */,
-			);
-			currentVersion = D13D004B29FD066000560D56 /* FX_App.xcdatamodel */;
-			path = FX_App.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = D13D003629FD066000560D56 /* Project object */;
 }
