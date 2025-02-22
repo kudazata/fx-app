@@ -30,7 +30,6 @@
 		D1A5D2CB2A0155F200241388 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A5D2CA2A0155F200241388 /* MainViewModelTests.swift */; };
 		D1A5D2CE2A01564600241388 /* NetworkServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A5D2CD2A01564600241388 /* NetworkServiceMock.swift */; };
 		D1C298DC2D69BA5F0089E806 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C298DB2D69BA570089E806 /* AppConfig.swift */; };
-		D1C298DE2D69BABA0089E806 /* AppConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D1C298DD2D69BABA0089E806 /* AppConfig.xcconfig */; };
 		D1C298E02D69BAD40089E806 /* AppConfig.sample.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D1C298DF2D69BAD40089E806 /* AppConfig.sample.xcconfig */; };
 		D1F05AC42A04045E00775D39 /* MainViewController+bindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F05AC32A04045E00775D39 /* MainViewController+bindings.swift */; };
 		D1F05AC62A0405DC00775D39 /* MainViewController+constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F05AC52A0405DC00775D39 /* MainViewController+constraints.swift */; };
@@ -88,7 +87,6 @@
 		D1A5D2CA2A0155F200241388 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		D1A5D2CD2A01564600241388 /* NetworkServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceMock.swift; sourceTree = "<group>"; };
 		D1C298DB2D69BA570089E806 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
-		D1C298DD2D69BABA0089E806 /* AppConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppConfig.xcconfig; sourceTree = "<group>"; };
 		D1C298DF2D69BAD40089E806 /* AppConfig.sample.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppConfig.sample.xcconfig; sourceTree = "<group>"; };
 		D1F05AC32A04045E00775D39 /* MainViewController+bindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+bindings.swift"; sourceTree = "<group>"; };
 		D1F05AC52A0405DC00775D39 /* MainViewController+constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+constraints.swift"; sourceTree = "<group>"; };
@@ -180,7 +178,6 @@
 				D13D004D29FD066200560D56 /* Assets.xcassets */,
 				D13D004F29FD066200560D56 /* LaunchScreen.storyboard */,
 				D13D005229FD066200560D56 /* Info.plist */,
-				D1C298DD2D69BABA0089E806 /* AppConfig.xcconfig */,
 				D1C298DF2D69BAD40089E806 /* AppConfig.sample.xcconfig */,
 			);
 			path = "FX App";
@@ -376,7 +373,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D13D005129FD066200560D56 /* LaunchScreen.storyboard in Resources */,
-				D1C298DE2D69BABA0089E806 /* AppConfig.xcconfig in Resources */,
 				D13D004E29FD066200560D56 /* Assets.xcassets in Resources */,
 				D1C298E02D69BAD40089E806 /* AppConfig.sample.xcconfig in Resources */,
 			);
@@ -574,7 +570,6 @@
 /* Begin XCBuildConfiguration section */
 		D13D006929FD066300560D56 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D1C298DD2D69BABA0089E806 /* AppConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -636,7 +631,6 @@
 		};
 		D13D006A29FD066300560D56 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D1C298DD2D69BABA0089E806 /* AppConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
